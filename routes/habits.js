@@ -2,14 +2,21 @@ const express = require("express");
 const router = express.Router();
 const db = require("../db");
 
-// GET: Semua habits user
+router.get("/", async (req, res) => {
+    try {
+      const result = await db.query("SELECT * FROM habits");
+      res.json(result.rows);
+    } catch (err) {
+      res.status(500).json({ error: err.message });
+    }
+  });
+
 router.get("/:user_id", async (req, res) => {
     const { user_id } = req.params;
     const { rows } = await db.query("SELECT * FROM habits WHERE user_id = $1", [user_id]);
     res.json(rows);
 });
 
-// POST: Tambah habit baru
 router.post("/", async (req, res) => {
     const { user_id, name, category, target, unit, color, icon } = req.body;
     const result = await db.query(
