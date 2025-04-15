@@ -23,5 +23,5 @@ function hitung() {
         }
     }
 
-    document.getElementById('hasil').textContent = hasil;
+    document.getElementById('hasil').textContent = hasil.toFixed(2);
 }
