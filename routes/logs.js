@@ -11,14 +11,12 @@ router.get("/", async (req, res) => {
     }
   });
 
-// GET: Semua log berdasarkan habit
 router.get("/:habit_id", async (req, res) => {
     const { habit_id } = req.params;
     const { rows } = await db.query("SELECT * FROM habit_logs WHERE habit_id = $1", [habit_id]);
     res.json(rows);
 });
 
-// POST: Tambah log habit
 router.post("/", async (req, res) => {
     const { habit_id, user_id, date, value } = req.body;
     const result = await db.query(

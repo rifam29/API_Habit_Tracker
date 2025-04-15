@@ -5,6 +5,7 @@ require("dotenv").config();
 const habitsRouter = require("./routes/habits");
 const logsRouter = require("./routes/logs");
 const profilesRouter = require("./routes/profiles");
+const mainRouter = require("./routes/main");
 
 const app = express();
 app.use(cors());
@@ -14,13 +15,12 @@ app.use(express.json());
 app.use("/api/habits", habitsRouter);
 app.use("/api/logs", logsRouter);
 app.use("/api/profiles", profilesRouter);
+app.use("/api/main", mainRouter);
 
-// Root route (simple health check)
 app.get("/", (req, res) => {
     res.json({ message: "API is running!" });
 });
 
-// Port for Railway / local dev
 const PORT = process.env.PORT || 3000;
 
 // Listen
